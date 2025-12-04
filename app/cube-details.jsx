@@ -1,7 +1,7 @@
 // Arquivo: app/cube-details.jsx (Melhorado)
 
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
-import { useLocalSearchParams, Stack } from "expo-router";
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, Alert } from "react-native";
+import { useLocalSearchParams, Stack, useRouter } from "expo-router";
 
 // Importações das imagens (necessário para usar a imagem dinamicamente)
 import cube2x2Image from '../assets/cubo-2x2.png'; 
@@ -19,6 +19,7 @@ const cubesData = {
 
 export default function CubeDetailsScreen() {
   const { name } = useLocalSearchParams();
+  const router = useRouter();
   const cube = cubesData[name] || null;
 
   // Define o título da tela
@@ -44,9 +45,22 @@ export default function CubeDetailsScreen() {
             <Text style={styles.sectionTitle}>Passos do Método:</Text>
             <Text style={styles.stepsText}>{cube.steps}</Text>
 
-            {/* Adicionando um botão de exemplo para mais interatividade */}
+            {/* Botão: Ver Tutorial Completo - agora navega para o passo a passo */}
             <View style={styles.buttonContainer}>
-              <Text style={styles.button}>Ver Tutorial Completo</Text>
+              <TouchableOpacity
+                accessibilityRole="button"
+                accessibilityLabel={`Ver tutorial completo de ${name}`}
+                style={styles.ctaButton}
+                onPress={() => {
+                  if (!name) {
+                    Alert.alert('Erro', 'Nome do cubo não especificado.');
+                    return;
+                  }
+                  router.push(`/tutorial-steps?name=${encodeURIComponent(name)}`);
+                }}
+              >
+                <Text style={styles.ctaText}>Ver Tutorial Completo</Text>
+              </TouchableOpacity>
             </View>
 
           </View>
@@ -117,6 +131,24 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: '100%',
     alignItems: 'center',
+  },
+  ctaButton: {
+    backgroundColor: '#007AFF',
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 30,
+    marginTop: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.12,
+    shadowRadius: 10,
+    elevation: 4,
+  },
+  ctaText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '700',
+    textAlign: 'center',
   },
   button: {
     backgroundColor: "#007AFF",
