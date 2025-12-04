@@ -1,16 +1,6 @@
 // Arquivo: app/cube-details.jsx (Melhorado)
 
-<<<<<<< HEAD
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, Alert } from "react-native";
-import { useLocalSearchParams, Stack, useRouter } from "expo-router";
-
-// Importações das imagens (necessário para usar a imagem dinamicamente)
-import cube2x2Image from '../assets/cubo-2x2.png'; 
-import cube3x3Image from '../assets/cubo-3x3.png';
-import cube4x4Image from '../assets/cube-4x4.png';
-import pyraminxImage from '../assets/cubo-pyraminx.png'; 
-=======
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from "react-native";
 import { useLocalSearchParams, Stack, useRouter } from "expo-router";
 
 // Importações das imagens (necessário para usar a imagem dinamicamente)
@@ -18,7 +8,6 @@ const cube2x2Image = require('../assets/cubo-2x2.png');
 const cube3x3Image = require('../assets/cubo-3x3.png');
 const cube4x4Image = require('../assets/cube-4x4.png');
 const pyraminxImage = require('../assets/cubo-pyraminx.png');
->>>>>>> 02acef7 (Torna botão 'Ver Tutorial Completo' interativo e melhora estilo do CTA)
 
 // Estrutura de dados para os cubos (replicada para acesso fácil)
 const cubesData = {
@@ -62,7 +51,6 @@ export default function CubeDetailsScreen() {
                 accessibilityRole="button"
                 accessibilityLabel={`Ver tutorial completo de ${name}`}
                 style={styles.ctaButton}
-<<<<<<< HEAD
                 onPress={() => {
                   if (!name) {
                     Alert.alert('Erro', 'Nome do cubo não especificado.');
@@ -70,9 +58,6 @@ export default function CubeDetailsScreen() {
                   }
                   router.push(`/tutorial-steps?name=${encodeURIComponent(name)}`);
                 }}
-=======
-                onPress={() => router.push({ pathname: '/tutorial-steps', params: { name } })}
->>>>>>> 02acef7 (Torna botão 'Ver Tutorial Completo' interativo e melhora estilo do CTA)
               >
                 <Text style={styles.ctaText}>Ver Tutorial Completo</Text>
               </TouchableOpacity>

@@ -29,59 +29,52 @@ npm install
 
 3. Inicie o servidor Expo/Metro:
 
+# Cubicon — Instruções rápidas
+
+Pequenas instruções para rodar e testar o app localmente.
+
+**Rodar em desenvolvimento**
+
+- Abra um terminal na pasta do projeto:
+
+```powershell
+cd C:\Users\thavy\Downloads\cubiconapp
+```
+
+- Instale dependências (se ainda não instalou):
+
+```powershell
+npm install
+```
+
+- Inicie o servidor Expo/Metro:
+
 ```powershell
 npm start
 ```
 
-Abrir no celular (Expo Go)
+**Abrir no celular (Expo Go)**
 
-- Instale o app Expo Go no seu celular (Android/iOS).
-- Certifique-se de que computador e celular estão na mesma rede Wi‑Fi (ou use `--tunnel`).
-- No terminal do `npm start` será exibido um QR code — escaneie com o Expo Go.
-
-Se houver problemas com a rede, tente iniciar com tunnel:
+- Instale o app "Expo Go" (Android / iOS).
+- Na mesma rede Wi‑Fi, escaneie o QR mostrado pelo `npm start` no terminal ou DevTools.
+- Se a rede bloquear o acesso, inicie com tunnel:
 
 ```powershell
-expo start --tunnel
+npx expo start --tunnel
 ```
 
-ou
+**O que testar**
 
-```powershell
-npm start -- --tunnel
-```
+- Em `app/index.jsx` e `app/tutorial.jsx` você encontra a lista de cubes.
+- Em `app/cube-details.jsx` abra um cubo e toque em "Ver Tutorial Completo" para ver o passo-a-passo (notação + explicação humana).
 
-O que foi adicionado / melhorado
+**Problemas comuns**
 
-- Tela `tutorial-steps`: passo-a-passo com duas visualizações — "mostrar tudo" e "passo a passo".
-- Textos e botões escritos em português natural, com legendas que explicam a notação (ex.: "R' = giro anti-horário da face direita").
-- Botão "Ver Tutorial Completo" em `cube-details` agora navega corretamente e exibe o tutorial do cubo selecionado.
-
-Dicas rápidas
-
-- Use a opção "Mostrar todas as etapas" para ver todos os algoritmos de uma vez.
-- Use "Passo a passo" para aprender devagar — o app mostra a notação e uma explicação simples de cada passo.
-
-Contribuindo
-
-- Faça um fork e crie uma branch com seu ajuste. Prefira commits pequenos e mensagens claras em português.
-- Exemplos de commit (humanizados):
-  - `Melhora texto do tutorial e adiciona explicação em linguagem simples`
-  - `Torna botão CTA interativo e melhora acessibilidade`
-
-Problemas comuns
-
-- Aviso de compatibilidade de versão do `react-dom`: se o terminal sugerir ajustar `react-dom` para `19.1.0`, rode:
+- Caso veja aviso de compatibilidade (react-dom), rode:
 
 ```powershell
 npm install react-dom@19.1.0
 npm install
 ```
 
-Contato / próximas etapas
-
-- Quer que eu: eu posso commitar essas mudanças no README e tentar subir para o GitHub, ou posso aplicar mais melhorias visuais (ícones, gradientes). Diga o que prefere.
-
----
-
-Feito com carinho — se quiser, eu crio um changelog curto com as alterações que fiz até agora.
+Pronto — se quiser eu comito esta mudança no README e tento empurrar para o GitHub. Se preferir, mantenho o README curto ainda mais (apenas comandos). Diga como prefere.
