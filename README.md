@@ -1,11 +1,80 @@
-# Sample Snack app
+# Cubicon App
 
-Open the `App.js` file to start writing some code. You can preview the changes directly on your phone or tablet by scanning the **QR code** or use the iOS or Android emulators. When you're done, click **Save** and share the link!
+Bem-vindo(a) ao repositório do Cubicon — um app simples com tutoriais para resolver cubos (2x2, 3x3, 4x4 e Pyraminx), feito com Expo e `expo-router`.
 
-When you're ready to see everything that Expo provides (or if you want to use your own editor) you can **Download** your project and use it with [expo cli](https://docs.expo.dev/get-started/installation/#expo-cli)).
+Este README explica rapidamente como rodar o projeto no seu computador e como abrir no celular, além de descrever a nova tela de tutorial passo-a-passo (notação R, L, U, D, F, B) com explicações em linguagem natural.
 
-All projects created in Snack are publicly available, so you can easily share the link to this project via link, or embed it on a web page with the `<>` button.
+**Principais arquivos**
 
-If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.dev/c/expo-dev-tools/61) or [Discord](https://chat.expo.dev/).
+- `App.js`, `index.js` – ponto de entrada do app.
+- `app/_layout.jsx` – layout e rotas (expo-router).
+- `app/index.jsx` – página inicial.
+- `app/tutorial.jsx` – lista de tutoriais e busca.
+- `app/cube-details.jsx` – tela de detalhes de cada cubo (agora com botão que abre o tutorial completo).
+- `app/tutorial-steps.jsx` – nova tela: passo-a-passo com notação e explicações humanizadas.
 
-Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack).
+Como rodar (desenvolvimento)
+
+1. Abra um terminal na pasta do projeto:
+
+```powershell
+cd C:\Users\thavy\Downloads\cubiconapp
+```
+
+2. Instale dependências (se ainda não instalou):
+
+```powershell
+npm install
+```
+
+3. Inicie o servidor Expo/Metro:
+
+# Cubicon — Instruções rápidas
+
+Pequenas instruções para rodar e testar o app localmente.
+
+**Rodar em desenvolvimento**
+
+- Abra um terminal na pasta do projeto:
+
+```powershell
+cd C:\Users\thavy\Downloads\cubiconapp
+```
+
+- Instale dependências (se ainda não instalou):
+
+```powershell
+npm install
+```
+
+- Inicie o servidor Expo/Metro:
+
+```powershell
+npm start
+```
+
+**Abrir no celular (Expo Go)**
+
+- Instale o app "Expo Go" (Android / iOS).
+- Na mesma rede Wi‑Fi, escaneie o QR mostrado pelo `npm start` no terminal ou DevTools.
+- Se a rede bloquear o acesso, inicie com tunnel:
+
+```powershell
+npx expo start --tunnel
+```
+
+**O que testar**
+
+- Em `app/index.jsx` e `app/tutorial.jsx` você encontra a lista de cubes.
+- Em `app/cube-details.jsx` abra um cubo e toque em "Ver Tutorial Completo" para ver o passo-a-passo (notação + explicação humana).
+
+**Problemas comuns**
+
+- Caso veja aviso de compatibilidade (react-dom), rode:
+
+```powershell
+npm install react-dom@19.1.0
+npm install
+```
+
+Pronto — se quiser eu comito esta mudança no README e tento empurrar para o GitHub. Se preferir, mantenho o README curto ainda mais (apenas comandos). Diga como prefere.
