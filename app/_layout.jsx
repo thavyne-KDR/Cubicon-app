@@ -21,6 +21,12 @@ export default function RootLayout() {
         },
         headerTransparent: false,
       }} />
+      <Stack.Screen name="cube-details" options={{ 
+        headerShown: true,
+        headerTintColor: '#000000',
+        headerTransparent: false,
+      }} />
+
     </Stack>
   );
 }
