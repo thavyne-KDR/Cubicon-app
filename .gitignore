@@ -1,0 +1,13 @@
+# dependencies
+/node_modules
+/.expo
+/web-build
+
+# testing
+/coverage
+
+# misc
+.DS_Store
+.env
+.env.local
+.expo-shared
