@@ -20,7 +20,7 @@ export default function Home() {
         <View style={styles.buttonContent}>
           <Ionicons 
             name="cube-outline" 
-            size={28}   
+            size={22}   
             color="#fff" 
             style={styles.buttonIcon} 
           />
@@ -53,31 +53,32 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   button: {
-    backgroundColor: "#007AFF", 
-    // AJUSTE: Diminuir um pouco o tamanho
-    paddingVertical: 16,      
-    paddingHorizontal: 70,    
-    borderRadius: 50,           
+    backgroundColor: "#007AFF",
+    // Ajustado: tamanhos mais proporcionais
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    minWidth: 160,
+    borderRadius: 36,
     shadowColor: "#007AFF",
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.4,
-    shadowRadius: 8,
-    elevation: 12,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 6,
+    elevation: 8,
   },
   buttonContent: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    // AJUSTE: Tentar centralizar o centro visual do texto/ícone
-    marginRight: -10, 
+    // Centraliza ícone e texto
+    marginRight: 0,
   },
   buttonIcon: {
     marginRight: 10, 
   },
   buttonText: {
     color: "#fff",
-    // AJUSTE: Texto levemente menor
-    fontSize: 22, 
+    // Texto levemente menor para melhor proporção
+    fontSize: 18,
     fontWeight: "700",
   },
 });
