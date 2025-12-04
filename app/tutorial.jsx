@@ -1,7 +1,7 @@
-// Arquivo: app/tutorial.jsx (Solução Definitiva)
+// Arquivo: app/tutorial.jsx (Solução Definitiva com Correções)
 
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Image, StatusBar } from "react-native";
-// IMPORTADO: StatusBar
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Image, StatusBar, TextInput } from "react-native"; // <-- Adicionado TextInput
+import { useRouter } from "expo-router"; // <-- Adicionado useRouter
 
 // Importações das imagens com o caminho CORRETO: ../assets/
 import cube2x2Image from '../assets/cubo-2x2.png'; 
@@ -9,65 +9,56 @@ import cube3x3Image from '../assets/cubo-3x3.png';
 import cube4x4Image from '../assets/cube-4x4.png';
 import pyraminxImage from '../assets/cubo-pyraminx.png'; 
 
+// Estrutura de dados para os cubos
+const cubes = [
+  { name: 'Cubo 2x2', image: cube2x2Image, steps: '• Método das Camadas\n• Resolver primeira camada\n• Orientação das últimas peças\n' },
+  { name: 'Cubo 3x3', image: cube3x3Image, steps: '• Fazer a cruz\n• Resolver a primeira e segunda camada\n• OLL (orientar últimas peças)\n• PLL (permuta final)\n' },
+  { name: 'Cubo 4x4', image: cube4x4Image, steps: '• Montar centros\n• Parear arestas\n• Resolver como 3x3\n' },
+  { name: 'Pyraminx', image: pyraminxImage, steps: '• Ajustar pontas\n• Resolver camadas laterais\n• Finalizar topo\n' },
+];
+
 export default function TutorialScreen() {
+  const router = useRouter(); // Inicializa o router
+
+  // Função para navegar e passar o parâmetro
+  const navigateToDetails = (cubeName) => {
+    router.push({
+      pathname: "/cube-details", // Rota para a nova tela de detalhes
+      params: { name: cubeName } // Parâmetro sendo passado (Requisito 2)
+    });
+  };
   
   return (
     <ScrollView 
         style={styles.container} 
         contentContainerStyle={styles.scrollContent}
     > 
-        {/* ESPAÇADOR: Adiciona um View vazio para empurrar o conteúdo para baixo. 
-           O valor 35-40px é geralmente seguro para limpar o notch/barra. */}
+        {/* ESPAÇADOR: Adiciona um View vazio para empurrar o conteúdo para baixo. */}
         <View style={{ height: 35 }} /> 
         
         <Text style={styles.title}>CUBOS DE RUBIK</Text> 
 
-        {/* CUBO 2X2 */}
-        <View style={styles.card}>
-          <Image source={cube2x2Image} style={styles.cubeImage} /> 
-          <Text style={styles.cubeName}>Cubo 2x2</Text>
-          <Text style={styles.steps}>
-            • Método das Camadas{"\n"}
-            • Resolver primeira camada{"\n"}
-            • Orientação das últimas peças{"\n"}
-          </Text>
-        </View>
+        {/* CAMPO DE TEXTO (Requisito 3) */}
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Buscar método de solução..."
+          placeholderTextColor="#999"
+        />
 
-        {/* ... (Resto dos cubos mantidos) ... */}
-
-        {/* CUBO 3X3 */}
-        <View style={styles.card}>
-          <Image source={cube3x3Image} style={styles.cubeImage} />
-          <Text style={styles.cubeName}>Cubo 3x3</Text>
-          <Text style={styles.steps}>
-            • Fazer a cruz{"\n"}
-            • Resolver a primeira e segunda camada{"\n"}
-            • OLL (orientar últimas peças){"\n"}
-            • PLL (permuta final){"\n"}
-          </Text>
-        </View>
-
-        {/* CUBO 4X4 */}
-        <View style={styles.card}>
-          <Image source={cube4x4Image} style={styles.cubeImage} />
-          <Text style={styles.cubeName}>Cubo 4x4</Text>
-          <Text style={styles.steps}>
-            • Montar centros{"\n"}
-            • Parear arestas{"\n"}
-            • Resolver como 3x3{"\n"}
-          </Text>
-        </View>
-
-        {/* PYRAMINX */}
-        <View style={styles.card}>
-          <Image source={pyraminxImage} style={styles.cubeImage} />
-          <Text style={styles.cubeName}>Pyraminx</Text>
-          <Text style={styles.steps}>
-            • Ajustar pontas{"\n"}
-            • Resolver camadas laterais{"\n"}
-            • Finalizar topo{"\n"}
-          </Text>
-        </View>
+        {/* Renderiza os cards clicáveis */}
+        {cubes.map((cube, index) => (
+          <TouchableOpacity 
+            key={index} 
+            onPress={() => navigateToDetails(cube.name)} // Passagem de parâmetro
+          >
+            <View style={styles.card}>
+              <Image source={cube.image} style={styles.cubeImage} /> 
+              <Text style={styles.cubeName}>{cube.name}</Text>
+              <Text style={styles.steps}>{cube.steps}</Text>
+            </View>
+          </TouchableOpacity>
+        ))}
+        
     </ScrollView>
   );
 }
@@ -79,7 +70,6 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingHorizontal: 20,
-    // Remover o paddingTop antigo (agora temos o espaçador)
     paddingTop: 0, 
     paddingBottom: 40,
   },
@@ -89,6 +79,16 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 30,
     color: '#333',
+  },
+  searchInput: { // Estilo para o Campo de Texto
+    height: 50,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    marginBottom: 20,
+    fontSize: 16,
+    backgroundColor: '#fff',
   },
   card: {
     padding: 20,
