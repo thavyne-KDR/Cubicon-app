@@ -1,80 +1,40 @@
-# Cubicon App
+# 🎲 Cubicon App
 
-Bem-vindo(a) ao repositório do Cubicon — um app simples com tutoriais para resolver cubos (2x2, 3x3, 4x4 e Pyraminx), feito com Expo e `expo-router`.
+Este repositório contém o código-fonte de um trabalho acadêmico que consiste no desenvolvimento de uma aplicação mobile utilizando React Native e Expo.
 
-Este README explica rapidamente como rodar o projeto no seu computador e como abrir no celular, além de descrever a nova tela de tutorial passo-a-passo (notação R, L, U, D, F, B) com explicações em linguagem natural.
+O projeto implementa um sistema de tutoriais interativos para resolução de cubos mágicos (2x2, 3x3, 4x4 e Pyraminx), demonstrando conceitos de navegação entre telas, componentização, e gerenciamento de estado em aplicações mobile modernas.
 
-**Principais arquivos**
+A aplicação utiliza `expo-router` para navegação baseada em arquivos e apresenta interface responsiva compatível com Android e iOS.
 
-- `App.js`, `index.js` – ponto de entrada do app.
-- `app/_layout.jsx` – layout e rotas (expo-router).
-- `app/index.jsx` – página inicial.
-- `app/tutorial.jsx` – lista de tutoriais e busca.
-- `app/cube-details.jsx` – tela de detalhes de cada cubo (agora com botão que abre o tutorial completo).
-- `app/tutorial-steps.jsx` – nova tela: passo-a-passo com notação e explicações humanizadas.
+## 🚀 Como Rodar
 
-Como rodar (desenvolvimento)
-
-1. Abra um terminal na pasta do projeto:
+1. **Entre na pasta do projeto:**
 
 ```powershell
-cd C:\Users\thavy\Downloads\cubiconapp
+cd Cubicon-app-main
 ```
 
-2. Instale dependências (se ainda não instalou):
+2. **Instale as dependências:**
 
 ```powershell
 npm install
 ```
 
-3. Inicie o servidor Expo/Metro:
-
-# Cubicon — Instruções rápidas
-
-Pequenas instruções para rodar e testar o app localmente.
-
-**Rodar em desenvolvimento**
-
-- Abra um terminal na pasta do projeto:
-
-```powershell
-cd C:\Users\thavy\Downloads\cubiconapp
-```
-
-- Instale dependências (se ainda não instalou):
-
-```powershell
-npm install
-```
-
-- Inicie o servidor Expo/Metro:
+3. **Inicie o app:**
 
 ```powershell
 npm start
 ```
 
-**Abrir no celular (Expo Go)**
+## 📱 Testar no Celular
 
-- Instale o app "Expo Go" (Android / iOS).
-- Na mesma rede Wi‑Fi, escaneie o QR mostrado pelo `npm start` no terminal ou DevTools.
-- Se a rede bloquear o acesso, inicie com tunnel:
+1. Instale o app **Expo Go** no seu celular (Android/iOS)
+2. Escaneie o QR code que aparece no terminal
+3. Se não funcionar, use: `npx expo start --tunnel`
 
-```powershell
-npx expo start --tunnel
-```
+## 📁 Estrutura
 
-**O que testar**
-
-- Em `app/index.jsx` e `app/tutorial.jsx` você encontra a lista de cubes.
-- Em `app/cube-details.jsx` abra um cubo e toque em "Ver Tutorial Completo" para ver o passo-a-passo (notação + explicação humana).
-
-**Problemas comuns**
-
-- Caso veja aviso de compatibilidade (react-dom), rode:
-
-```powershell
-npm install react-dom@19.1.0
-npm install
-```
-
-Pronto — se quiser eu comito esta mudança no README e tento empurrar para o GitHub. Se preferir, mantenho o README curto ainda mais (apenas comandos). Diga como prefere.
+- `app/index.jsx` - Página inicial
+- `app/tutorial.jsx` - Lista de tutoriais
+- `app/cube-details.jsx` - Detalhes de cada cubo
+- `app/tutorial-steps.jsx` - Tutorial passo a passo
