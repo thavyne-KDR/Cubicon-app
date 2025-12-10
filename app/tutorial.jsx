@@ -1,15 +1,12 @@
-// Arquivo: app/tutorial.jsx (Solução Definitiva com Correções)
 
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Image, StatusBar, TextInput } from "react-native"; // <-- Adicionado TextInput
-import { useRouter } from "expo-router"; // <-- Adicionado useRouter
-
-// Importações das imagens com o caminho CORRETO: ../assets/
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Image, StatusBar, TextInput } from "react-native";
+import { useRouter } from "expo-router";
 import cube2x2Image from '../assets/cubo-2x2.png'; 
 import cube3x3Image from '../assets/cubo-3x3.png';
 import cube4x4Image from '../assets/cube-4x4.png';
 import pyraminxImage from '../assets/cubo-pyraminx.png'; 
 
-// Estrutura de dados para os cubos
+// Dados dos cubos disponíveis
 const cubes = [
   { name: 'Cubo 2x2', image: cube2x2Image, steps: '• Método das Camadas\n• Resolver primeira camada\n• Orientação das últimas peças\n' },
   { name: 'Cubo 3x3', image: cube3x3Image, steps: '• Fazer a cruz\n• Resolver a primeira e segunda camada\n• OLL (orientar últimas peças)\n• PLL (permuta final)\n' },
@@ -17,47 +14,59 @@ const cubes = [
   { name: 'Pyraminx', image: pyraminxImage, steps: '• Ajustar pontas\n• Resolver camadas laterais\n• Finalizar topo\n' },
 ];
 
-export default function TutorialScreen() {
-  const router = useRouter(); // Inicializa o router
+import React, { useState } from 'react';
 
-  // Função para navegar e passar o parâmetro
+export default function TutorialScreen() {
+  const router = useRouter();
+  const [search, setSearch] = useState("");
+
+  // Navega para a tela de detalhes do cubo
   const navigateToDetails = (cubeName) => {
     router.push({
-      pathname: "/cube-details", // Rota para a nova tela de detalhes
-      params: { name: cubeName } // Parâmetro sendo passado (Requisito 2)
+      pathname: "/cube-details",
+      params: { name: cubeName }
     });
   };
-  
+
+  // Filtra os cubos conforme o texto digitado
+  const filteredCubes = cubes.filter(cube =>
+    cube.name.toLowerCase().includes(search.toLowerCase()) ||
+    cube.steps.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <ScrollView 
         style={styles.container} 
         contentContainerStyle={styles.scrollContent}
     > 
-        {/* ESPAÇADOR: Adiciona um View vazio para empurrar o conteúdo para baixo. */}
         <View style={{ height: 35 }} /> 
         
         <Text style={styles.title}>CUBOS DE RUBIK</Text> 
 
-        {/* CAMPO DE TEXTO (Requisito 3) */}
         <TextInput
           style={styles.searchInput}
           placeholder="Buscar método de solução..."
           placeholderTextColor="#999"
+          value={search}
+          onChangeText={setSearch}
         />
 
-        {/* Renderiza os cards clicáveis */}
-        {cubes.map((cube, index) => (
-          <TouchableOpacity 
-            key={index} 
-            onPress={() => navigateToDetails(cube.name)} // Passagem de parâmetro
-          >
-            <View style={styles.card}>
-              <Image source={cube.image} style={styles.cubeImage} /> 
-              <Text style={styles.cubeName}>{cube.name}</Text>
-              <Text style={styles.steps}>{cube.steps}</Text>
-            </View>
-          </TouchableOpacity>
-        ))}
+        {filteredCubes.length === 0 ? (
+          <Text style={{textAlign: 'center', color: '#999'}}>Nenhum cubo encontrado.</Text>
+        ) : (
+          filteredCubes.map((cube, index) => (
+            <TouchableOpacity 
+              key={index} 
+              onPress={() => navigateToDetails(cube.name)}
+            >
+              <View style={styles.card}>
+                <Image source={cube.image} style={styles.cubeImage} /> 
+                <Text style={styles.cubeName}>{cube.name}</Text>
+                <Text style={styles.steps}>{cube.steps}</Text>
+              </View>
+            </TouchableOpacity>
+          ))
+        )}
         
     </ScrollView>
   );

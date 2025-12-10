@@ -1,10 +1,9 @@
-// Arquivo: app/tutorial-steps.jsx
-// Tela que mostra passo-a-passo com notação (R, L, U, D, F, B)
 
 import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { useLocalSearchParams, Stack } from 'expo-router';
 
+// Tutoriais detalhados para cada cubo
 const tutorials = {
 	'Cubo 2x2': [
 		{ title: 'Montar a primeira camada (camada de base)', desc: 'Forme uma face completa (qualquer cor como base). Posicione e oriente cantos.', moves: "R U R' U'", human: 'Gire a face direita, depois a de cima, e repita para posicionar cantos.' },

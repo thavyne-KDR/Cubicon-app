@@ -1,8 +1,7 @@
+
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from '@expo/vector-icons'; 
-
-// Importação do logo
 import logoImage from "../assets/logo.png";
 
 export default function Home() {
@@ -41,20 +40,17 @@ const styles = StyleSheet.create({
   logo: {
     width: 350,
     height: 350,
-    // AJUSTE: Menor espaçamento aqui
     marginBottom: 10, 
     resizeMode: 'contain',
   },
   title: {
     fontSize: 28,
     fontWeight: "bold",
-    // AJUSTE: Maior espaçamento aqui para empurrar o botão
     marginBottom: 70, 
     color: '#333',
   },
   button: {
     backgroundColor: "#007AFF",
-    // Ajustado: tamanhos mais proporcionais
     paddingVertical: 12,
     paddingHorizontal: 40,
     minWidth: 160,
@@ -69,7 +65,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    // Centraliza ícone e texto
     marginRight: 0,
   },
   buttonIcon: {
@@ -77,7 +72,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#fff",
-    // Texto levemente menor para melhor proporção
     fontSize: 18,
     fontWeight: "700",
   },

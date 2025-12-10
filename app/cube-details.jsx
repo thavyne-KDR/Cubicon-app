@@ -1,15 +1,14 @@
-// Arquivo: app/cube-details.jsx (Melhorado)
 
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, Alert } from "react-native";
 import { useLocalSearchParams, Stack, useRouter } from "expo-router";
 
-// Importações das imagens (necessário para usar a imagem dinamicamente)
+// Importação das imagens dos cubos
 const cube2x2Image = require('../assets/cubo-2x2.png');
 const cube3x3Image = require('../assets/cubo-3x3.png');
 const cube4x4Image = require('../assets/cube-4x4.png');
 const pyraminxImage = require('../assets/cubo-pyraminx.png');
 
-// Estrutura de dados para os cubos (replicada para acesso fácil)
+// Dados dos cubos e seus passos principais
 const cubesData = {
   'Cubo 2x2': { image: cube2x2Image, steps: '• Método das Camadas\n• Resolver primeira camada\n• Orientação das últimas peças\n' },
   'Cubo 3x3': { image: cube3x3Image, steps: '• Fazer a cruz\n• Resolver a primeira e segunda camada\n• OLL (orientar últimas peças)\n• PLL (permuta final)\n' },
@@ -22,7 +21,7 @@ export default function CubeDetailsScreen() {
   const router = useRouter();
   const cube = cubesData[name] || null;
 
-  // Define o título da tela
+  // Define o título da tela dinamicamente
   const screenTitle = name ? `Detalhes: ${name}` : 'Detalhes do Cubo';
 
   return (
@@ -45,7 +44,7 @@ export default function CubeDetailsScreen() {
             <Text style={styles.sectionTitle}>Passos do Método:</Text>
             <Text style={styles.stepsText}>{cube.steps}</Text>
 
-            {/* Botão: Ver Tutorial Completo - agora navega para o passo a passo */}
+            {/* Botão principal para acessar o tutorial completo */}
             <View style={styles.buttonContainer}>
               <TouchableOpacity
                 accessibilityRole="button"
@@ -85,7 +84,7 @@ const styles = StyleSheet.create({
   },
   card: {
     width: '100%',
-    maxWidth: 600, // Limite de largura para telas maiores
+    maxWidth: 600,
     padding: 25,
     borderRadius: 15,
     backgroundColor: "#fff",
@@ -158,7 +157,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     fontSize: 16,
     fontWeight: '600',
-    overflow: 'hidden', // Necessário para o borderRadius funcionar no Text em algumas plataformas
+    overflow: 'hidden',
     marginTop: 10,
   },
   errorContainer: {
