@@ -1,0 +1,151 @@
+
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Image, StatusBar, TextInput } from "react-native";
+import { useRouter } from "expo-router";
+import cube2x2Image from '../assets/cubo-2x2.png'; 
+import cube3x3Image from '../assets/cubo-3x3.png';
+import cube4x4Image from '../assets/cube-4x4.png';
+import pyraminxImage from '../assets/cubo-pyraminx.png'; 
+
+// Dados dos cubos disponíveis
+const cubes = [
+  { name: 'Cubo 2x2', image: cube2x2Image, steps: '• Método das Camadas\n• Resolver primeira camada\n• Orientação das últimas peças\n' },
+  { name: 'Cubo 3x3', image: cube3x3Image, steps: '• Fazer a cruz\n• Resolver a primeira e segunda camada\n• OLL (orientar últimas peças)\n• PLL (permuta final)\n' },
+  { name: 'Cubo 4x4', image: cube4x4Image, steps: '• Montar centros\n• Parear arestas\n• Resolver como 3x3\n' },
+  { name: 'Pyraminx', image: pyraminxImage, steps: '• Ajustar pontas\n• Resolver camadas laterais\n• Finalizar topo\n' },
+];
+
+import React, { useState } from 'react';
+
+export default function TutorialScreen() {
+  const router = useRouter();
+  const [search, setSearch] = useState("");
+
+  // Navega direto para o tutorial completo
+  const navigateToDetails = (cubeName) => {
+    router.push({
+      pathname: "/tutorial-steps",
+      params: { name: cubeName }
+    });
+  };
+
+  // Filtra os cubos conforme o texto digitado
+  const filteredCubes = cubes.filter(cube =>
+    cube.name.toLowerCase().includes(search.toLowerCase()) ||
+    cube.steps.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    <ScrollView 
+        style={styles.container} 
+        contentContainerStyle={styles.scrollContent}
+    > 
+        <View style={{ height: 35 }} /> 
+        
+        <Text style={styles.title}>CUBOS DE RUBIK</Text> 
+
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Buscar método de solução..."
+          placeholderTextColor="#999"
+          value={search}
+          onChangeText={setSearch}
+        />
+
+        {filteredCubes.length === 0 ? (
+          <Text style={{textAlign: 'center', color: '#999'}}>Nenhum cubo encontrado.</Text>
+        ) : (
+          filteredCubes.map((cube, index) => (
+            <View key={index} style={styles.card}>
+              <Image source={cube.image} style={styles.cubeImage} /> 
+              <Text style={styles.cubeName}>{cube.name}</Text>
+              <Text style={styles.steps}>{cube.steps}</Text>
+              
+              <TouchableOpacity 
+                style={styles.tutorialButton}
+                onPress={() => navigateToDetails(cube.name)}
+              >
+                <Text style={styles.tutorialButtonText}>Ver Tutorial Completo</Text>
+              </TouchableOpacity>
+            </View>
+          ))
+        )}
+        
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#F9F9F9",
+  },
+  scrollContent: {
+    paddingHorizontal: 20,
+    paddingTop: 0, 
+    paddingBottom: 40,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: "700",
+    textAlign: "center",
+    marginBottom: 30,
+    color: '#333',
+  },
+  searchInput: { // Estilo para o Campo de Texto
+    height: 50,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    marginBottom: 20,
+    fontSize: 16,
+    backgroundColor: '#fff',
+  },
+  card: {
+    padding: 20,
+    borderRadius: 12,
+    marginBottom: 20,
+    backgroundColor: "#fff",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  tutorialButton: {
+    backgroundColor: '#007AFF',
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 30,
+    marginTop: 15,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  tutorialButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  cubeImage: {
+    width: 100, 
+    height: 100, 
+    alignSelf: "center", 
+    marginBottom: 15,
+    resizeMode: 'contain',
+  },
+  cubeName: {
+    fontSize: 20,
+    fontWeight: "600",
+    marginBottom: 10,
+    color: '#333',
+  },
+  steps: { 
+    fontSize: 15,
+    lineHeight: 24,
+    color: '#555',
+  },
+});
